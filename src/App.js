@@ -8,17 +8,22 @@ const App = () => {
   const [busqueda, setBusqueda] = useState('');
   const [imagenes, setImagenes] = useState([]);
   const [peticionVacia, setPeticionVacia] = useState(false);
-  const [paginaActual, setPaginaActual] = useState(4);
+  const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
 
-  useEffect(() => {
 
+  useEffect(() => {
+    setPaginaActual(1)
+  }, [busqueda])
+
+  useEffect(() => {
+    // console.log('desde el useEffect')
     const consultarApi = async () => {
       if(busqueda === '') return;
   
       const imagenesPorPagina = 30;
       const key = '17997109-6aacfb96d3c78d72b639c185f';
-      const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&per_page=${imagenesPorPagina} `;
+      const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&per_page=${imagenesPorPagina}&page${paginaActual} `;
 
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
@@ -28,22 +33,31 @@ const App = () => {
       }
       setPeticionVacia(false)
       setImagenes(resultado.hits);
-
+                              // Calculo del total de paginas
       const calcularTotalPaginas = Math.ceil(resultado.totalHits / imagenesPorPagina)
       setTotalPaginas(calcularTotalPaginas)
-    }
 
+                              // Mover la pantalla para arriba 
+      const jumbotron = document.querySelector('.jumbotron');
+      jumbotron.scrollIntoView({behavior: 'smooth'});
+    }
     consultarApi();
 
-  },[busqueda])
+  },[busqueda, paginaActual])
 
 
   // ir a la pagina anterior
-
   const paginaAnterior = () => {
     const nuevaPaginaActual = paginaActual - 1;
     if(nuevaPaginaActual === 0) return;
     setPaginaActual(nuevaPaginaActual)
+  }
+
+  // ir a la pagina siguiente
+  const paginaSiguiente = () => {
+    const nuevaPaginaSiguiente = paginaActual + 1;
+    if(nuevaPaginaSiguiente > totalPaginas) return;
+    setPaginaActual(nuevaPaginaSiguiente)
   }
 
   return (
@@ -57,24 +71,31 @@ const App = () => {
         />
       </div>    
       <div className="row justify-content-center">
-      {peticionVacia && <Error mensaje="No hay datos para mostrar" />}
+        {peticionVacia && <Error mensaje="No hay datos para mostrar" />}
         <ListadoImagenes
           imagenes={imagenes}
         />
-        <button 
-          type ="button"
-          className="bbtn btn-info mr-1"
-          onClick={paginaAnterior}
-        >
-           &laquo; Anterior
-        </button>
 
-        <button 
-          type ="button"
-          className="bbtn btn-info mr-1"
-        >
-          Siguiente &raquo; 
-        </button>
+        {(paginaActual === 1) ? null : (
+          <button 
+            type ="button"
+            className="bbtn btn-info mr-1"
+            onClick={paginaAnterior}
+          >
+            &laquo; Anterior
+          </button>
+        )}
+
+        {(paginaActual !== totalPaginas) && (
+          <button 
+            type ="button"
+            className="bbtn btn-info mr-1"
+            onClick={paginaSiguiente}
+          >
+            Siguiente &raquo; 
+          </button>
+        )}
+
       </div>  
     </div>
   );
