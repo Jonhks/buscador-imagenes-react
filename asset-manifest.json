@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/buscador-imagenes-react/static/css/main.f2e4a89f.chunk.css",
+    "main.js": "/buscador-imagenes-react/static/js/main.0812ccfb.chunk.js",
+    "main.js.map": "/buscador-imagenes-react/static/js/main.0812ccfb.chunk.js.map",
+    "runtime-main.js": "/buscador-imagenes-react/static/js/runtime-main.2cdad3e8.js",
+    "runtime-main.js.map": "/buscador-imagenes-react/static/js/runtime-main.2cdad3e8.js.map",
+    "static/js/2.35dad620.chunk.js": "/buscador-imagenes-react/static/js/2.35dad620.chunk.js",
+    "static/js/2.35dad620.chunk.js.map": "/buscador-imagenes-react/static/js/2.35dad620.chunk.js.map",
+    "static/js/3.223f2014.chunk.js": "/buscador-imagenes-react/static/js/3.223f2014.chunk.js",
+    "static/js/3.223f2014.chunk.js.map": "/buscador-imagenes-react/static/js/3.223f2014.chunk.js.map",
+    "index.html": "/buscador-imagenes-react/index.html",
+    "static/css/main.f2e4a89f.chunk.css.map": "/buscador-imagenes-react/static/css/main.f2e4a89f.chunk.css.map",
+    "static/js/2.35dad620.chunk.js.LICENSE.txt": "/buscador-imagenes-react/static/js/2.35dad620.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2cdad3e8.js",
+    "static/js/2.35dad620.chunk.js",
+    "static/css/main.f2e4a89f.chunk.css",
+    "static/js/main.0812ccfb.chunk.js"
+  ]
+}
